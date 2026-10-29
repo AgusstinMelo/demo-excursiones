@@ -1,0 +1,59 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   VARIABLES DE DISEÑO
+   Único archivo con colores, tipografías y medidas. Cada valor se traslada a los
+   ajustes globales de la plantilla de WordPress (paleta, tipografías, botones, radios).
+   ───────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Colores — WordPress: Paleta global */
+  --c-bg: #fbf7f0;           /* Blanco cálido: fondo general */
+  --c-sand: #f2e9da;         /* Arena: secciones alternas */
+  --c-surface: #ffffff;      /* Tarjetas, modales y formulario */
+  --c-ink: #1c2a23;          /* Texto principal: verde casi negro */
+  --c-muted: #55635a;        /* Texto secundario (AA sobre blanco y arena) */
+  --c-line: #e3d9c7;         /* Bordes y separadores */
+  --c-green: #2e5b44;        /* Verde bosque: titulares destacados, enlaces, iconos (AA) */
+  --c-green-soft: #dfe9db;   /* Verde suave: fondos de iconos y etiquetas */
+  --c-sea: #22647f;          /* Azul mar: sección de info práctica y detalles (AA) */
+  --c-sky: #dbeaf0;          /* Azul cielo suave */
+  --c-accent: #f2b33d;       /* Mostaza: botones de llamada a la acción (texto oscuro encima) */
+  --c-accent-hover: #e6a224;
+  --c-accent-ink: #1c2a23;   /* Texto sobre mostaza (contraste 8:1) */
+  --c-coral: #e26d4f;        /* Coral: detalles decorativos (no para texto pequeño) */
+  --c-whatsapp: #177d45;     /* Botón de WhatsApp (texto blanco AA) */
+  --c-error: #b42318;
+  --c-success: #2e5b44;
+
+  /* Tipografías — WordPress: Tipografía global */
+  --f-display: "Fraunces", "Fraunces Fallback", Georgia, serif;
+  --f-body: "DM Sans", "DM Sans Fallback", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+
+  /* Medidas */
+  --container: 1280px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --section-y: clamp(4.5rem, 10vw, 8rem);
+  --header-h: 72px;
+  --r-sm: 12px;              /* Campos y etiquetas */
+  --r-md: 20px;              /* Tarjetas */
+  --r-lg: 32px;              /* Fotos grandes y bloques */
+}
+
+/* Fuentes de reserva con métricas medidas sobre Fraunces y DM Sans: el cambio a la fuente web no mueve el texto (CLS) */
+@font-face {
+  font-family: "Fraunces Fallback";
+  src: local("Georgia");
+  font-display: swap;
+  size-adjust: 107.5%;
+  ascent-override: 91%;
+  descent-override: 23.7%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "DM Sans Fallback";
+  src: local("Arial");
+  font-display: swap;
+  size-adjust: 103.5%;
+  ascent-override: 95.8%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}

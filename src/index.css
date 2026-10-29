@@ -1,0 +1,149 @@
+@import "tailwindcss";
+@import "./styles/tokens.css";
+
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-sand: var(--c-sand);
+  --color-surface: var(--c-surface);
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-green: var(--c-green);
+  --color-green-soft: var(--c-green-soft);
+  --color-sea: var(--c-sea);
+  --color-sky: var(--c-sky);
+  --color-accent: var(--c-accent);
+  --color-accent-ink: var(--c-accent-ink);
+  --color-coral: var(--c-coral);
+  --color-whatsapp: var(--c-whatsapp);
+  --color-error: var(--c-error);
+  --color-success: var(--c-success);
+  --font-display: var(--f-display);
+  --font-sans: var(--f-body);
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 36px);
+    -webkit-tap-highlight-color: transparent;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    overflow-x: clip;
+  }
+  h1, h2, h3 { text-wrap: balance; }
+  /* text-wrap: pretty en párrafos se omite: encarece mucho la primera maquetación en móvil */
+  ::selection { background: var(--c-accent); color: var(--c-accent-ink); }
+  :focus-visible { outline: 2px solid var(--c-sea); outline-offset: 3px; }
+  .on-dark :focus-visible { outline-color: var(--c-accent); }
+  [tabindex="-1"]:focus { outline: none; }
+}
+
+/* ── Utilidades del sistema ─────────────────────────────────────────────────── */
+@utility wrap {
+  width: 100%;
+  max-width: calc(var(--container) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+@utility section-y {
+  padding-block: var(--section-y);
+}
+@utility display {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-optical-sizing: auto;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+@utility eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Botones: el mismo estilo se replica en la plantilla (Ajustes globales → Botones) */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 50px;
+  padding: 0.8rem 1.6rem;
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.98rem;
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s, transform 0.25s;
+  cursor: pointer;
+  &:active { transform: scale(0.98); }
+}
+@utility btn-accent {
+  background: var(--c-accent);
+  color: var(--c-accent-ink);
+  &:hover { background: var(--c-accent-hover); }
+}
+@utility btn-dark {
+  background: var(--c-ink);
+  color: #fff;
+  &:hover { background: var(--c-green); }
+}
+@utility btn-outline {
+  border-color: color-mix(in srgb, var(--c-ink) 25%, transparent);
+  color: var(--c-ink);
+  &:hover { border-color: var(--c-ink); }
+}
+@utility btn-glass {
+  background: rgb(255 255 255 / 0.16);
+  border-color: rgb(255 255 255 / 0.6);
+  color: #fff;
+  &:hover { background: rgb(255 255 255 / 0.24); }
+}
+@utility btn-whatsapp {
+  background: var(--c-whatsapp);
+  color: #fff;
+  &:hover { background: color-mix(in srgb, var(--c-whatsapp) 85%, black); }
+}
+
+@utility field {
+  width: 100%;
+  min-height: 50px;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--c-line);
+  border-radius: var(--r-sm);
+  background: var(--c-surface);
+  color: var(--c-ink);
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  &::placeholder { color: #7b867f; }
+  &:hover { border-color: #cbbfa9; }
+  &:focus { outline: none; border-color: var(--c-sea); box-shadow: 0 0 0 4px color-mix(in srgb, var(--c-sea) 18%, transparent); }
+  &[aria-invalid="true"] { border-color: var(--c-error); }
+}
+
+@utility prose-legal {
+  & h2 { font-family: var(--f-display); font-weight: 600; font-size: 1.55rem; line-height: 1.2; margin: 2.5rem 0 0.8rem; }
+  & p { margin-top: 0.85rem; }
+}
+
+/* Marquee infinito (CSS). Con movimiento reducido queda estático. */
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee-track { animation: marquee 40s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* Carrusel con scroll snap (galería en móvil) */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }

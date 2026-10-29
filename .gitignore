@@ -1,0 +1,6 @@
+node_modules
+dist
+.vercel
+
+# Propuesta para la clienta (solo en local)
+PROPUESTA.txt
